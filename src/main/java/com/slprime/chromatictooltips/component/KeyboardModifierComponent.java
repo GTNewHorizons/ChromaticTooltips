@@ -3,8 +3,6 @@ package com.slprime.chromatictooltips.component;
 import java.util.Arrays;
 import java.util.EnumSet;
 
-import net.minecraft.util.EnumChatFormatting;
-
 import com.slprime.chromatictooltips.api.ITooltipComponent;
 import com.slprime.chromatictooltips.api.TooltipContext;
 import com.slprime.chromatictooltips.api.TooltipModifier;
@@ -24,7 +22,7 @@ public class KeyboardModifierComponent implements ITooltipComponent {
     }
 
     protected void refreshText() {
-        this.text = EnumChatFormatting.DARK_GRAY.toString();
+        this.text = "";
 
         for (TooltipModifier modifier : Arrays
             .asList(TooltipModifier.SHIFT, TooltipModifier.CTRL, TooltipModifier.ALT)) {

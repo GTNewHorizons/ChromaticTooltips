@@ -43,7 +43,7 @@ chromatictooltips.enricher.attributes.durability.icon=%s§7 / %s
 chromatictooltips.enricher.attributes.fuel.text=§9Burn Time: %s
 chromatictooltips.enricher.attributes.fuel.icon=%s
 
-chromatictooltips.enricher.attributes.armor.text=§9Protection: %s
+chromatictooltips.enricher.attributes.armor.text=§9+%s Armor
 chromatictooltips.enricher.attributes.armor.icon=%s
 
 chromatictooltips.enricher.keyboard-modifier.shift.inactive=§8[shift]§r
