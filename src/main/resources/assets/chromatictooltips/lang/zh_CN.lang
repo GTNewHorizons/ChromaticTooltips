@@ -7,12 +7,12 @@ chromatictooltips.navigation.page.next_only=§8页面: %s / %s [按 %s 下一页
 chromatictooltips.navigation.page.previous_only=§8页面: %s / %s [按 %s 上一页]
 
 chromatictooltips.enricher.stacksize.item=§8数量: §7%s
-chromatictooltips.enricher.stacksize.item.short=§8数量: §7%s 
-chromatictooltips.enricher.stacksize.item.full=§8数量: §7%s 
+chromatictooltips.enricher.stacksize.item.short=§8数量: §7%s = %s * %s 
+chromatictooltips.enricher.stacksize.item.full=§8数量: §7%s = %s * %s + %s 
 
-chromatictooltips.enricher.stacksize.fluid=§8容量: §7%s 升
-chromatictooltips.enricher.stacksize.fluid.short=§8容量: §7%s 升 
-chromatictooltips.enricher.stacksize.fluid.full=§8容量: §7%s 升 
+chromatictooltips.enricher.stacksize.fluid=§8容量: §7%s 
+chromatictooltips.enricher.stacksize.fluid.short=§8容量: §7%s = %s * %s
+chromatictooltips.enricher.stacksize.fluid.full=§8容量: §7%s = %s * %s + %s 
 
 chromatictooltips.enricher.stacksize.container=§8容器物品量: §7%s
 chromatictooltips.enricher.stacksize.container.short=§8容器物品量: §7%s = %s * %s
