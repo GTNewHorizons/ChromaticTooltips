@@ -28,11 +28,11 @@
         {
           "name": "ChromaticTooltips-1.0.12-dev.jar",
           "url": "ChromaticTooltips-1.0.12-dev.jar",
-          "size": 227053,
-          "sha512": "baaaa8078187d0f167bd01a3ade89a35d40746da36138366bc66d01fffd90823764cfa47cfdcbcd9030978dc50b087653c69260d97624a2a845e35c8ab79e65a",
-          "sha256": "4065753ee79875f2a3de660a70b2e1ef918375da4383744df47aa1317e0d6d68",
-          "sha1": "d12c0fbec892fc1104ba08e82e57b33c334fe885",
-          "md5": "7fd905167e150f4567e2f2475d120b6b"
+          "size": 226509,
+          "sha512": "90c5e5060b55df7aa13882b39aafded6495f2eb0e545a4357de8419ea02c62f9c1547d5d18cb9aaf9ef56cfcabd37b8bda8f98e784d01b9e195de0d44bcbc871",
+          "sha256": "df9e499bd421c14dd9a134e57f7994fad3bc11fd31abffecd99ed893c248310f",
+          "sha1": "042a4a7bc20b1667903c0c0970812b01145939af",
+          "md5": "85b761e7b6063399744c2747f9cc93e2"
         }
       ]
     },
@@ -98,11 +98,11 @@
         {
           "name": "ChromaticTooltips-1.0.12-dev.jar",
           "url": "ChromaticTooltips-1.0.12-dev.jar",
-          "size": 227053,
-          "sha512": "baaaa8078187d0f167bd01a3ade89a35d40746da36138366bc66d01fffd90823764cfa47cfdcbcd9030978dc50b087653c69260d97624a2a845e35c8ab79e65a",
-          "sha256": "4065753ee79875f2a3de660a70b2e1ef918375da4383744df47aa1317e0d6d68",
-          "sha1": "d12c0fbec892fc1104ba08e82e57b33c334fe885",
-          "md5": "7fd905167e150f4567e2f2475d120b6b"
+          "size": 226509,
+          "sha512": "90c5e5060b55df7aa13882b39aafded6495f2eb0e545a4357de8419ea02c62f9c1547d5d18cb9aaf9ef56cfcabd37b8bda8f98e784d01b9e195de0d44bcbc871",
+          "sha256": "df9e499bd421c14dd9a134e57f7994fad3bc11fd31abffecd99ed893c248310f",
+          "sha1": "042a4a7bc20b1667903c0c0970812b01145939af",
+          "md5": "85b761e7b6063399744c2747f9cc93e2"
         }
       ]
     },
@@ -119,11 +119,11 @@
         {
           "name": "ChromaticTooltips-1.0.12.jar",
           "url": "ChromaticTooltips-1.0.12.jar",
-          "size": 228944,
-          "sha512": "deca951d70de0ed93716b72e26ffede162994c3559222d101e1cf694bba0b65d529220e3c82e79619599b9d5ef73ebb4aba78c0e7df6024ab1c094e00b9f19c2",
-          "sha256": "a42c74f30442d428a2c5ba2776436934b547bacc38fa7d2cea03b7cc0901ecae",
-          "sha1": "72971129fd9008f7ece5d2d7cc18a1859e908b28",
-          "md5": "99545e6aa01b2e0e63cdee0abe98b502"
+          "size": 228419,
+          "sha512": "6683d321e4c579728dafd05eadcdb216bc72262643e7a0eb40ac7c3a77890105e7a817861e0a5995617c6b77b456abeca8dffb29aaa3c0bfdb4e42beaf93b02c",
+          "sha256": "d8f8a7247fe5749404148648634cf142372704c83c273de9f4ee294fde13cc2f",
+          "sha1": "9d50cb4588752dec68d82a153f5a0a012dbcdfa8",
+          "md5": "b9a64798efd43126e64e003332003b09"
         }
       ]
     },
@@ -140,11 +140,11 @@
         {
           "name": "ChromaticTooltips-1.0.12-sources.jar",
           "url": "ChromaticTooltips-1.0.12-sources.jar",
-          "size": 125833,
-          "sha512": "89e48a6f6134b4bfdd4d5df3d499b55e7ba4ad3cf7428a396f8eab2e7dbddb6dd49667e28a1cae5f0b9bec45825885d39b7d7183f24550099678f645a969c238",
-          "sha256": "b09396d9336eae5bc741a968af5037c0893a159b3f05211cfeb8b82d2bb1f07d",
-          "sha1": "c10ae80c57a719f0b5a67ca26a8b14f870eb2bf4",
-          "md5": "6030db5de83add082cd1d370f9c5da78"
+          "size": 126256,
+          "sha512": "b9fd46543ae5250af144b188f63a956d837e937af32692743291e130a24355be002725b560a52962f8fa05d1d4af8d59b271ecb56d8d89776984099bb339ff80",
+          "sha256": "525bde420e535da3fdfa5a583c84648926d298fc54d3cd6b0035d40caf394905",
+          "sha1": "c460d130d1993d8a53eb4305442077d983acc566",
+          "md5": "ac7d6f9d8a2c53c708ac036fdc62024f"
         }
       ]
     }
