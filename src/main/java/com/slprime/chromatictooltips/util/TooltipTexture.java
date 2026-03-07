@@ -491,7 +491,12 @@ public class TooltipTexture {
         final boolean hasBlend = GL11.glGetBoolean(GL11.GL_BLEND);
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        GL11.glColor4f(mixColor >> 16 & 255, mixColor >> 8 & 255, mixColor & 255, mixColor >> 24 & 255);
+        GL11.glColor4f(
+            (mixColor >> 16 & 255) / 255.0F,
+            (mixColor >> 8 & 255) / 255.0F,
+            (mixColor & 255) / 255.0F,
+            ((mixColor >> 24) & 255) / 255.0F);
+
         TooltipUtils.bindTexture(this.resourceLocation);
 
         if (this.calculatedInlineSizes == null || this.lastInlineWidth != width) {
