@@ -13,12 +13,14 @@ public class TooltipFontContext {
 
     protected static class Context {
 
+        public FontRenderer fontRenderer;
         public int[] colors = new int[32];
         public boolean shadow = true;
         public int paragraph = 6;
 
-        public Context(int[] colors, boolean shadow, int paragraph) {
-            this.colors = Arrays.copyOf(TooltipFontContext.getFontRenderer().colorCode, 32);
+        public Context(FontRenderer fontRenderer, int[] colors, boolean shadow, int paragraph) {
+            this.fontRenderer = fontRenderer;
+            this.colors = Arrays.copyOf(fontRenderer.colorCode, 32);
             this.shadow = shadow;
             this.paragraph = paragraph;
 
@@ -38,7 +40,6 @@ public class TooltipFontContext {
     public static final int LINE_SPACE = 1;
     public static final int DEFAULT_SPACING = 2;
 
-    protected static FontRenderer fontRenderer = null;
     protected static final int INHERIT_COLOR = 0x00000000;
     protected static final String[] colorOrders = new String[] { "black", "dark_blue", "dark_green", "dark_aqua",
         "dark_red", "dark_purple", "gold", "gray", "dark_gray", "blue", "green", "aqua", "red", "light_purple",
@@ -47,11 +48,16 @@ public class TooltipFontContext {
     protected Context previousContext = null;
     protected static Context activeContext = null;
 
+    protected FontRenderer fontRenderer = null;
     protected int[] customColors = new int[32];
     protected Boolean shadow = null;
     protected Integer paragraph = null;
 
     public TooltipFontContext(TooltipStyle formatting) {
+        this(formatting, null);
+    }
+
+    public TooltipFontContext(TooltipStyle formatting, FontRenderer fontRenderer) {
         final TooltipStyle colorStyle = new TooltipStyle(
             formatting.getAsJsonObject("font.colors", formatting.getAsJsonObject("fontColors", new JsonObject())));
 
@@ -66,6 +72,8 @@ public class TooltipFontContext {
         } else if (formatting.containsKey("fontParagraph")) {
             this.paragraph = formatting.getAsInt("fontParagraph", 6);
         }
+
+        this.fontRenderer = fontRenderer;
 
         Arrays.fill(this.customColors, INHERIT_COLOR);
 
@@ -103,7 +111,7 @@ public class TooltipFontContext {
     protected static Context context() {
 
         if (TooltipFontContext.activeContext == null) {
-            TooltipFontContext.activeContext = new Context(new int[0], true, 6);
+            TooltipFontContext.activeContext = new Context(TooltipUtils.mc().fontRenderer, new int[0], true, 6);
         }
 
         return TooltipFontContext.activeContext;
@@ -113,6 +121,7 @@ public class TooltipFontContext {
         this.previousContext = context();
 
         TooltipFontContext.activeContext = new Context(
+            this.fontRenderer == null ? TooltipFontContext.activeContext.fontRenderer : this.fontRenderer,
             this.customColors,
             this.shadow == null ? TooltipFontContext.activeContext.shadow : this.shadow,
             this.paragraph == null ? TooltipFontContext.activeContext.paragraph : this.paragraph);
@@ -138,12 +147,7 @@ public class TooltipFontContext {
     }
 
     public static FontRenderer getFontRenderer() {
-
-        if (TooltipFontContext.fontRenderer == null) {
-            TooltipFontContext.fontRenderer = TooltipUtils.mc().fontRenderer;
-        }
-
-        return TooltipFontContext.fontRenderer;
+        return context().fontRenderer;
     }
 
     public static int getFontHeight() {

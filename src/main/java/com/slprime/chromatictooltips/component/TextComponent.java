@@ -60,7 +60,7 @@ public class TextComponent implements ITooltipComponent {
     }
 
     protected ITooltipComponent createInstance(List<String> lines) {
-        return new TextComponent(lines, spacing);
+        return new TextComponent(lines, this.spacing);
     }
 
     @Override
