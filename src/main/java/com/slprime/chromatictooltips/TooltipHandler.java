@@ -263,9 +263,8 @@ public class TooltipHandler {
 
     protected static void enrichTooltip(TooltipContext context) {
         final TooltipModifier activeModifier = TooltipUtils.getActiveModifier();
-        final TooltipStyle style = context.getRenderer()
-            .getStyle();
         final ITooltipRenderer renderer = context.getRenderer();
+        final TooltipStyle style = renderer.getStyle();
         final List<SectionComponent> headerSections = new ArrayList<>();
         final List<SectionComponent> bodySections = new ArrayList<>();
         final List<SectionComponent> footerSections = new ArrayList<>();

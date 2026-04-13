@@ -22,7 +22,7 @@ public class TooltipContext {
     protected long animationStartTime;
     protected final String context;
     protected List<ITooltipComponent> contextTooltip = new ArrayList<>();
-    protected List<SectionComponent> lines = new ArrayList<>();
+    protected List<SectionComponent> sections = new ArrayList<>();
     protected EnumSet<TooltipModifier> supportedModifiers = EnumSet.noneOf(TooltipModifier.class);
     protected TooltipModifier activeModifier = TooltipModifier.NONE;
     protected int scaleFactor = 1;
@@ -117,19 +117,29 @@ public class TooltipContext {
     }
 
     public List<SectionComponent> getSections() {
-        return Collections.unmodifiableList(this.lines);
+        return Collections.unmodifiableList(this.sections);
+    }
+
+    public SectionComponent getSection(String sectionId) {
+        for (SectionComponent section : this.sections) {
+            if (section.getSectionId()
+                .equals(sectionId)) {
+                return section;
+            }
+        }
+        return null;
     }
 
     public void addSection(int index, String sectionId, List<ITooltipComponent> components) {
         if (components == null || components.isEmpty()) return;
-        index = Math.max(0, Math.min(index, this.lines.size()));
-        this.lines.add(index, new SectionComponent(sectionId, this.renderer.getSectionBox(sectionId), components));
+        index = Math.max(0, Math.min(index, this.sections.size()));
+        this.sections.add(index, new SectionComponent(sectionId, this.renderer.getSectionBox(sectionId), components));
         this.revision++;
     }
 
     public void addSection(String sectionId, List<ITooltipComponent> components) {
         if (components == null || components.isEmpty()) return;
-        this.lines.add(new SectionComponent(sectionId, this.renderer.getSectionBox(sectionId), components));
+        this.sections.add(new SectionComponent(sectionId, this.renderer.getSectionBox(sectionId), components));
         this.revision++;
     }
 
@@ -138,7 +148,7 @@ public class TooltipContext {
     }
 
     public boolean isEmpty() {
-        return this.lines.isEmpty();
+        return this.sections.isEmpty();
     }
 
     public SectionComponent getActivePageComponent() {
