@@ -17,7 +17,9 @@ public class ComponentRegistry {
     private static final int CAPACITY = 4096;
 
     private static final String COMPONENT_PREFIX = "§z";
+    private static final String COMPONENT_SUFFIX = "§Z";
     private static final String PERMANENT_COMPONENT_PREFIX = "§Z";
+    private static final String PERMANENT_COMPONENT_SUFFIX = "§z";
 
     private final Map<String, ITooltipComponent> permanentValues = new HashMap<>();
     private final Map<ITooltipComponent, String> permanentReverse = new IdentityHashMap<>();
@@ -32,7 +34,7 @@ public class ComponentRegistry {
         final Integer existing = this.temporaryReverse.get(value);
 
         if (existing != null) {
-            return COMPONENT_PREFIX + makeToken(existing);
+            return COMPONENT_PREFIX + makeToken(existing) + COMPONENT_SUFFIX;
         }
 
         final int id = this.temporaryCursor;
@@ -46,7 +48,7 @@ public class ComponentRegistry {
         this.temporaryReverse.put(value, id);
         this.temporaryCursor = (this.temporaryCursor + 1) % this.temporaryValues.length;
 
-        return COMPONENT_PREFIX + makeToken(id);
+        return COMPONENT_PREFIX + makeToken(id) + COMPONENT_SUFFIX;
     }
 
     private int makeToken(int id) {
@@ -55,9 +57,12 @@ public class ComponentRegistry {
 
     public ITooltipComponent getTemporary(String line) {
 
-        if (line.startsWith(COMPONENT_PREFIX)) {
+        if (line.startsWith(COMPONENT_PREFIX) && line.endsWith(COMPONENT_SUFFIX)
+            && line.length() > COMPONENT_PREFIX.length() + COMPONENT_SUFFIX.length()) {
             try {
-                final int token = Integer.parseInt(line.substring(COMPONENT_PREFIX.length()));
+                final String digits = line
+                    .substring(COMPONENT_PREFIX.length(), line.length() - COMPONENT_SUFFIX.length());
+                final int token = Integer.parseInt(digits);
                 final int id = token & ID_MASK;
                 final int gen = token >>> ID_BITS;
 
@@ -90,7 +95,7 @@ public class ComponentRegistry {
             return existing;
         }
 
-        final String key = PERMANENT_COMPONENT_PREFIX + (this.permanentCursor++);
+        final String key = PERMANENT_COMPONENT_PREFIX + (this.permanentCursor++) + PERMANENT_COMPONENT_SUFFIX;
         this.permanentValues.put(key, value);
         this.permanentReverse.put(value, key);
         return key;
