@@ -87,7 +87,18 @@ public class InlineComponent implements ITooltipComponent {
 
     @Override
     public int getSpacing() {
-        return TooltipFontContext.DEFAULT_SPACING;
+
+        if (this.lines.isEmpty()) {
+            return TooltipFontContext.DEFAULT_SPACING;
+        }
+
+        int spacing = 0;
+
+        for (ITooltipComponent component : this.lines.get(this.lines.size() - 1)) {
+            spacing = Math.max(spacing, component.getSpacing());
+        }
+
+        return spacing;
     }
 
     @Override

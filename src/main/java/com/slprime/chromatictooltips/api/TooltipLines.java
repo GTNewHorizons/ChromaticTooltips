@@ -2,6 +2,7 @@ package com.slprime.chromatictooltips.api;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
@@ -12,10 +13,12 @@ import net.minecraft.util.EnumChatFormatting;
 
 import com.slprime.chromatictooltips.TooltipHandler;
 import com.slprime.chromatictooltips.TooltipRegistry;
+import com.slprime.chromatictooltips.component.InlineComponent;
 import com.slprime.chromatictooltips.component.ParagraphComponent;
 import com.slprime.chromatictooltips.component.SpaceComponent;
 import com.slprime.chromatictooltips.component.TextComponent;
 import com.slprime.chromatictooltips.event.TextLinesConverterEvent;
+import com.slprime.chromatictooltips.util.TooltipFontContext;
 import com.slprime.chromatictooltips.util.TooltipUtils;
 
 public class TooltipLines {
@@ -125,20 +128,9 @@ public class TooltipLines {
                     }
 
                 } else if (str.endsWith(HEADER_SUFFIX)) {
-                    results.add(
-                        new TextComponent(
-                            TooltipUtils.applyBaseColorIfAbsent(
-                                str.substring(0, str.length() - HEADER_SUFFIX.length()),
-                                BASE_COLOR),
-                            HEADER_SPACING));
+                    results.add(buildTextLine(str.substring(0, str.length() - HEADER_SUFFIX.length()), HEADER_SPACING));
                 } else {
-                    ITooltipComponent component = TooltipHandler.getTooltipComponent(str);
-
-                    if (component == null) {
-                        component = new TextComponent(TooltipUtils.applyBaseColorIfAbsent(str, BASE_COLOR));
-                    }
-
-                    results.add(component);
+                    results.add(buildTextLine(str, TooltipFontContext.DEFAULT_SPACING));
                 }
 
             }
@@ -158,6 +150,63 @@ public class TooltipLines {
         }
 
         return results;
+    }
+
+    protected static ITooltipComponent buildTextLine(String str, int spacing) {
+        final String colored = TooltipUtils.applyBaseColorIfAbsent(str, BASE_COLOR);
+        final List<ITooltipComponent> inlineRow = new ArrayList<>();
+        final StringBuilder buffer = new StringBuilder();
+        int i = 0;
+
+        while (i < colored.length()) {
+            final char c = colored.charAt(i);
+
+            if (c == '§' && i + 1 < colored.length()
+                && (colored.charAt(i + 1) == 'z' || colored.charAt(i + 1) == 'Z')) {
+                final char openMark = colored.charAt(i + 1);
+                final char closeMark = openMark == 'z' ? 'Z' : 'z';
+                final int close = colored.indexOf("§" + closeMark, i + 2);
+
+                if (close > i + 2 && isDigits(colored, i + 2, close)) {
+                    final String token = colored.substring(i, close + 2);
+                    final ITooltipComponent tokenComponent = TooltipHandler.getTooltipComponent(token);
+
+                    if (tokenComponent != null) {
+                        if (buffer.length() > 0) {
+                            inlineRow.add(new TextComponent(buffer.toString(), spacing));
+                            buffer.setLength(0);
+                        }
+
+                        inlineRow.add(tokenComponent);
+                        i = close + 2;
+                        continue;
+                    }
+                }
+            }
+
+            buffer.append(c);
+            i++;
+        }
+
+        if (inlineRow.isEmpty()) {
+            return new TextComponent(colored, spacing);
+        }
+
+        if (buffer.length() > 0) {
+            inlineRow.add(new TextComponent(buffer.toString(), spacing));
+        }
+
+        return inlineRow.size() == 1 ? inlineRow.get(0)
+            : new InlineComponent(Collections.singletonList(inlineRow), 0, 0);
+    }
+
+    private static boolean isDigits(String str, int from, int to) {
+
+        for (int i = from; i < to; i++) {
+            if (!Character.isDigit(str.charAt(i))) return false;
+        }
+
+        return true;
     }
 
     public boolean isEmpty() {
